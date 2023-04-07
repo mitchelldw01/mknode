@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "postinstall": "ts-node --swc src/postinstall.ts"
+    "postinstall": "npx ts-node --swc src/postinstall.ts"
   },
   "bin": {
     "mknode": "src/index.ts"
