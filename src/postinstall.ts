@@ -1,10 +1,14 @@
 import fs from "fs-extra";
 import inquirer from "inquirer";
 import * as defaults from "./defaults.js";
-import { homedir } from "os";
+import os from "os";
 import path from "path";
 
-export const configPath = path.join(homedir(), ".config/mknode.json");
+const useTempDir = process.env.NODE_ENV === "test" ? true : false;
+
+const configPath = useTempDir
+  ? `${os.tmpdir()}/mknode.json`
+  : path.join(os.homedir(), ".config/mknode.json");
 
 await postinstall();
 
@@ -26,7 +30,12 @@ async function postinstall(): Promise<void> {
       await fs.writeJSON(configPath, defaults, { spaces: 2 });
     }
   } else {
-    await fs.ensureFile(configPath);
+    if (useTempDir) {
+      await fs.promises.open(configPath, "w");
+    } else {
+      await fs.ensureFile(configPath);
+    }
+
     await fs.writeJSON(configPath, defaults, { spaces: 2 });
   }
 }

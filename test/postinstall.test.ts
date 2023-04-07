@@ -1,25 +1,27 @@
-import { afterAll, beforeEach, describe, it } from "vitest";
+import { beforeEach, describe, it } from "vitest";
 import fs from "fs-extra";
-import path from "path";
-import { homedir } from "os";
+import os from "os";
 import * as defaults from "../src/defaults.js";
 import { postinstall } from "./util/postinstall.js";
 
-const configPath = path.join(homedir(), ".config/mknode.json");
+const configPath = `${os.tmpdir()}/mknode.json`;
 
 describe("postinstall", () => {
-  describe("when config file does not exist", () => {
-    beforeEach(async () => {
-      await fs.remove(configPath);
-    });
+  beforeEach(async () => {
+    if (await fs.pathExists(configPath)) {
+      await fs.unlink(configPath);
+    }
+  });
 
+  describe("when config file does not exist", () => {
     it("should create config file", async ({ expect }) => {
-      await postinstall("n");
+      const buffer = await postinstall("n");
+      console.log(buffer);
       expect(await fs.pathExists(configPath)).toBe(true);
     });
 
     it("should write defaults to config file", async ({ expect }) => {
-      await postinstall("y");
+      await postinstall("n");
       expect(await fs.readJSON(configPath)).toEqual({ ...defaults });
     });
 
@@ -31,12 +33,8 @@ describe("postinstall", () => {
 
   describe("when config file exists", () => {
     beforeEach(async () => {
-      await fs.ensureFile(configPath);
+      await fs.open(configPath, "w");
       await fs.writeJSON(configPath, { hello: "world" }, { spaces: 2 });
-    });
-
-    afterAll(async () => {
-      await postinstall("y");
     });
 
     it("should prompt user", async ({ expect }) => {
