@@ -2,7 +2,7 @@ import { spawn } from "child_process";
 
 export async function postinstall(answer: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
-    const child = spawn("ts-node", ["src/postinstall.ts"]);
+    const child = spawn("npx", ["ts-node", "src/postinstall.ts"]);
 
     let buffer = "";
 
