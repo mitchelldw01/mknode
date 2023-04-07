@@ -2,7 +2,6 @@ import { spawn } from "child_process";
 import fs from "fs-extra";
 import path from "path";
 import * as defaults from "./defaults.js";
-import { homedir } from "os";
 
 interface Scripts {
   test: string;
