@@ -50,7 +50,14 @@ export async function initPackageJson(cwd: string): Promise<void> {
   return new Promise((resolve, reject) => {
     const child = spawn("npm", ["init", ...process.argv.slice(2)], { cwd });
 
-    child.on("close", resolve);
+    child.on("close", (code) => {
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error("Failed to initialize package.json"));
+      }
+    });
+
     child.on("error", (error) => reject(error));
 
     process.stdin.pipe(child.stdin);
