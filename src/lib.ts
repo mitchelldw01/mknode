@@ -4,8 +4,6 @@ import path from "path";
 import * as defaults from "./defaults.js";
 import { homedir } from "os";
 
-const configPath = path.join(homedir(), ".config/mknode.json");
-
 interface Scripts {
   test: string;
   "test:watch": string;
@@ -29,7 +27,7 @@ interface BootstrapData {
   tsconfigEsLint: Record<string, unknown>;
 }
 
-export async function readBootstrapData(): Promise<BootstrapData> {
+export async function readBootstrapData(configPath: string): Promise<BootstrapData> {
   const data = (await fs.readJSON(configPath)) as BootstrapData;
 
   return {

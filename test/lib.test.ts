@@ -16,7 +16,7 @@ describe("lib", () => {
       });
 
       it("should read the config file", async ({ expect }) => {
-        const data = await readBootstrapData();
+        const data = await readBootstrapData(configPath);
         expect(data).toEqual({ ...defaults });
       });
     });
@@ -27,7 +27,7 @@ describe("lib", () => {
       });
 
       it("should replace missing fields with defaults", async ({ expect }) => {
-        const data = await readBootstrapData();
+        const data = await readBootstrapData(configPath);
         expect(data).toEqual({ ...defaults, prettierrc: defaults.prettierrc });
       });
     });

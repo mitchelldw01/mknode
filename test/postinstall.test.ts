@@ -19,7 +19,7 @@ describe("postinstall", () => {
     });
 
     it("should write defaults to config file", async ({ expect }) => {
-      await postinstall("n");
+      await postinstall("y");
       expect(await fs.readJSON(configPath)).toEqual({ ...defaults });
     });
 
