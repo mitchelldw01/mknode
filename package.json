@@ -1,0 +1,55 @@
+{
+  "name": "mknode",
+  "version": "1.0.0",
+  "description": "Bootstrap Node.js projects with TypeScript, ESLint, Prettier and Vitest",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "postinstall": "ts-node --swc src/postinstall.ts"
+  },
+  "bin": {
+    "mknode": "src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitchelldw01/mknode.git"
+  },
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "node",
+    "typescript",
+    "eslint",
+    "prettier",
+    "vitest",
+    "bootstrap"
+  ],
+  "author": "Mitchell Wilson <mitchelldw01@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mitchelldw01/mknode/issues"
+  },
+  "homepage": "https://github.com/mitchelldw01/mknode#readme",
+  "devDependencies": {
+    "@swc/core": "^1.3.46",
+    "@types/fs-extra": "^11.0.1",
+    "@types/inquirer": "^9.0.3",
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "prettier": "^2.8.7",
+    "typescript": "^5.0.3",
+    "vitest": "^0.29.8"
+  },
+  "dependencies": {
+    "fs-extra": "^11.1.1",
+    "inquirer": "^9.1.5",
+    "ora": "^6.3.0"
+  }
+}
