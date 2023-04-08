@@ -66,10 +66,11 @@ export async function initPackageJson(args: string[], cwd: string): Promise<void
 export async function updatePackageJson(scripts: Scripts, cwd: string): Promise<void> {
   const packageJsonPath = path.join(cwd, "package.json");
   const packageJson = await fs.readJson(packageJsonPath);
-  const testScript = packageJson.scripts.test;
+  const { test, ...other } = scripts;
 
   packageJson.scripts = {
-    test: testScript === 'echo "Error: no test specified" && exit 1' ? scripts.test : testScript,
+    test: test === 'echo "Error: no test specified" && exit 1' ? scripts.test : test,
+    ...other,
   };
 
   await fs.writeJson(packageJsonPath, packageJson, { spaces: 2 });
