@@ -2,7 +2,17 @@ import fs from "fs-extra";
 import os from "os";
 import { afterEach, beforeEach, describe, it } from "vitest";
 import * as defaults from "../src/defaults.js";
-import { readBootstrapData, initPackageJson } from "../src/lib.js";
+import {
+  readBootstrapData,
+  initPackageJson,
+  installDependencies,
+  createTsConfigs,
+  createEsLintConfig,
+  createPrettierConfig,
+  createGitignore,
+  createSrcCode,
+  updatePackageJson,
+} from "../src/lib.js";
 import { postinstall } from "./util/postinstall.js";
 
 const configPath = `${os.tmpdir()}/mknode.json`;
@@ -57,6 +67,36 @@ describe("lib", () => {
     it("should initialize a new package.json file", async ({ expect }) => {
       await initPackageJson(["-y"], tempDir);
       expect(await fs.pathExists(`${tempDir}/package.json`)).toBe(true);
+    });
+  });
+
+  describe("updatePackageJson", () => {
+    let tempDir: string;
+
+    beforeEach(async () => {
+      tempDir = await fs.mkdtemp(projectPath);
+    });
+
+    afterEach(async () => {
+      await fs.remove(tempDir);
+    });
+
+    it("should update package.json scripts", async ({ expect }) => {
+      const scripts = {
+        test: "test",
+        "test:watch": "test:watch",
+        start: "start",
+        "start:prod": "start:prod",
+        build: "build",
+        lint: "lint",
+        format: "format",
+      };
+
+      await initPackageJson(["-y"], tempDir);
+      await updatePackageJson(scripts, tempDir);
+
+      const packageJson = await fs.readJSON(`${tempDir}/package.json`);
+      expect(packageJson.scripts).toEqual(scripts);
     });
   });
 });
