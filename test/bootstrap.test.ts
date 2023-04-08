@@ -85,6 +85,14 @@ describe("bootstrap", () => {
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith("indexTs", projectPath);
   });
+
+  it("calls createDockerfile with dockerfile, dockercompose and cwd", async ({ expect }) => {
+    const spy = vi.spyOn(lib, "createDockerConfig");
+    await bootstrap(["y"], projectPath, configPath);
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith("dockerfile", "dockercompose", projectPath);
+  });
 });
 
 function mockLib() {
@@ -97,6 +105,7 @@ function mockLib() {
       createPrettierConfig: () => 0,
       createGitignore: () => 0,
       createSrcCode: () => 0,
+      createDockerConfig: () => 0,
       installDependencies: () => 0,
       readBootstrapData: () => {
         return {
@@ -110,6 +119,8 @@ function mockLib() {
           scripts: { scripts: true },
           tsconfig: { tsconfig: true },
           tsconfigEsLint: { tsconfigEsLint: true },
+          dockerfile: "dockerfile",
+          dockercompose: "dockercompose",
         };
       },
     };

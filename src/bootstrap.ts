@@ -1,5 +1,6 @@
 import ora from "ora";
 import {
+  createDockerConfig,
   createEsLintConfig,
   createGitignore,
   createPrettierConfig,
@@ -27,6 +28,8 @@ export async function bootstrap(
     scripts,
     tsconfig,
     tsconfigEsLint,
+    dockerfile,
+    dockercompose,
   } = await readBootstrapData(configPath);
 
   await initPackageJson(initArgs, cwd);
@@ -50,6 +53,7 @@ export async function bootstrap(
     createPrettierConfig(prettierrc, prettierignore, cwd),
     createGitignore(gitignore, cwd),
     createSrcCode(indexTs, cwd),
+    createDockerConfig(dockerfile, dockercompose, cwd),
   ]);
 
   spinner.succeed();

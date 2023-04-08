@@ -1,6 +1,6 @@
 # mknode
 
-Bootstrap Node.js projects with TypeScript, ESLint, Prettier and Vitest
+Bootstrap Node.js projects with TypeScript, ESLint, Prettier, Docker and Vitest
 
 ![Example](./example.svg)
 

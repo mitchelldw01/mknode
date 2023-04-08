@@ -3,6 +3,7 @@ import os from "os";
 import { afterEach, beforeEach, describe, it } from "vitest";
 import * as defaults from "../src/defaults.js";
 import {
+  createDockerConfig,
   createEsLintConfig,
   createGitignore,
   createPrettierConfig,
@@ -245,6 +246,24 @@ describe("lib", () => {
       const indexTs = 'console.log("Hello, World!")';
       await createSrcCode(indexTs, tempDir);
       expect(await fs.readFile(`${tempDir}/src/index.ts`, "utf-8")).toEqual(indexTs);
+    });
+  });
+
+  describe("createDockerConfig", () => {
+    let tempDir: string;
+
+    beforeEach(async () => {
+      tempDir = await fs.mkdtemp(projectPath);
+    });
+
+    afterEach(async () => {
+      await fs.remove(tempDir);
+    });
+
+    it("should create Dockerfile", async ({ expect }) => {
+      await createDockerConfig("dockerfile", "dockercompose", tempDir);
+      expect(await fs.readFile(`${tempDir}/Dockerfile`, "utf-8")).toEqual("dockerfile");
+      expect(await fs.readFile(`${tempDir}/docker-compose.yml`, "utf-8")).toEqual("dockercompose");
     });
   });
 });

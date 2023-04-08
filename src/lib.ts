@@ -24,6 +24,8 @@ interface BootstrapData {
   prettierrc: Record<string, unknown>;
   tsconfig: Record<string, unknown>;
   tsconfigEsLint: Record<string, unknown>;
+  dockerfile: string;
+  dockercompose: string;
 }
 
 export async function readBootstrapData(configPath: string): Promise<BootstrapData> {
@@ -40,6 +42,8 @@ export async function readBootstrapData(configPath: string): Promise<BootstrapDa
     prettierrc: data.prettierrc || defaults.prettierrc,
     tsconfig: data.tsconfig || defaults.tsconfig,
     tsconfigEsLint: data.tsconfigEsLint || defaults.tsconfigEsLint,
+    dockerfile: data.dockerfile || defaults.dockerfile,
+    dockercompose: data.dockercompose || defaults.dockercompose,
   };
 }
 
@@ -119,4 +123,13 @@ export async function createGitignore(gitignore: string, cwd: string): Promise<v
 export async function createSrcCode(indexTs: string, cwd: string): Promise<void> {
   await fs.mkdir(path.join(cwd, "src"));
   await fs.writeFile(path.join(cwd, "src/index.ts"), indexTs);
+}
+
+export async function createDockerConfig(
+  dockerfile: string,
+  dockercompose: string,
+  cwd: string,
+): Promise<void> {
+  await fs.writeFile(path.join(cwd, "dockerfile"), dockerfile);
+  await fs.writeFile(path.join(cwd, "docker-compose.yml"), dockercompose);
 }

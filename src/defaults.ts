@@ -94,3 +94,33 @@ export const prettierignore = "/node_modules\n/dist\n";
 export const gitignore = "/node_modules\n/dist\n*.env\n!.env.example\n";
 
 export const indexTs = 'console.log("Hello, World!");\n';
+
+export const dockerfile = `FROM node:16-alpine
+
+WORKDIR /app
+
+COPY package*.json .
+
+EXPOSE 3000
+
+ENV NODE_ENV=development
+
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "start"]
+`;
+
+export const dockercompose = `version: "3.9"
+
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+`;
