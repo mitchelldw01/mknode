@@ -2,8 +2,8 @@ export const scripts = {
   test: "vitest run",
   "test:watch": "vitest",
   start: "ts-node src/index.ts",
-  "start:prod": "node dist/index.ts",
-  build: "ts-node scripts/build.ts",
+  "start:prod": "node dist/index.js",
+  build: "tsc",
   lint: "eslint .",
   format: "eslint --fix .",
 };
@@ -49,35 +49,37 @@ export const tsconfigEsLint = {
     strict: true,
     skipLibCheck: true,
   },
-  exclude: ["dist", "**/*.test.ts"],
+  exclude: ["dist"],
 };
 
 export const eslintrc = {
-  root: true,
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    ecmaVersion: 2022,
-    sourceType: "module",
-    ecmaFeatures: {
-      jsx: false,
-    },
+  env: {
+    browser: true,
+    es2022: true,
   },
-  plugins: ["@typescript-eslint", "simple-import-sort", "prettier"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    "plugin:eslint-comments/recommended",
-    "plugin:import/recommended",
-    "plugin:import/typescript",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/ignore",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript",
-    "plugin:eslint-comments/recommended",
   ],
+  overrides: [],
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
+  },
+  plugins: ["@typescript-eslint", "simple-import-sort", "prettier"],
+  rules: {
+    "prettier/prettier": "error",
+    "sort-imports": "off",
+    "simple-import-sort/exports": "error",
+    "simple-import-sort/imports": [
+      "error",
+      {
+        groups: [["^\\u0000", "^@?\\w", "^[^.]", "^\\."]],
+      },
+    ],
+  },
 };
 
 export const eslintignore = "/node_modules\n/dist\n";

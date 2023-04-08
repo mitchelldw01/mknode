@@ -1,6 +1,6 @@
-import { beforeEach, describe, it } from "vitest";
 import fs from "fs-extra";
 import os from "os";
+import { beforeEach, describe, it } from "vitest";
 import * as defaults from "../src/defaults.js";
 import { postinstall } from "./util/postinstall.js";
 

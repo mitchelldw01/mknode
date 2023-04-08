@@ -1,8 +1,8 @@
 #!/usr/bin/env -S npx ts-node --swc
 
+import { homedir } from "os";
 import path from "path";
 import { bootstrap } from "./bootstrap.js";
-import { homedir } from "os";
 
 const cwd = process.cwd();
 

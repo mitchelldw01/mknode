@@ -3,14 +3,14 @@ import os from "os";
 import { afterEach, beforeEach, describe, it } from "vitest";
 import * as defaults from "../src/defaults.js";
 import {
-  readBootstrapData,
+  createEsLintConfig,
+  createGitignore,
+  createPrettierConfig,
+  createSrcCode,
+  createTsConfigs,
   initPackageJson,
   installDependencies,
-  createTsConfigs,
-  createEsLintConfig,
-  createPrettierConfig,
-  createGitignore,
-  createSrcCode,
+  readBootstrapData,
   updatePackageJson,
 } from "../src/lib.js";
 import { postinstall } from "./util/postinstall.js";

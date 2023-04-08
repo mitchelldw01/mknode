@@ -1,8 +1,8 @@
 import fs from "fs-extra";
 import inquirer from "inquirer";
-import * as defaults from "./defaults.js";
 import os from "os";
 import path from "path";
+import * as defaults from "./defaults.js";
 
 const useTempDir = process.env.NODE_ENV === "test" ? true : false;
 

@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "vitest --threads false",
-    "postinstall": "npx ts-node --swc src/postinstall.ts"
+    "postinstall": "npx ts-node --swc src/postinstall.ts",
+    "lint": "eslint .",
+    "format": "eslint --fix ."
   },
   "bin": {
     "mknode": "src/index.ts"
@@ -39,12 +41,13 @@
     "@types/node": "^18.15.11",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
-    "eslint": "^8.37.0",
+    "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "prettier": "^2.8.7",
-    "typescript": "^5.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4",
     "vitest": "^0.29.8"
   },
   "dependencies": {

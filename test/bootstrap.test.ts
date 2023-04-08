@@ -1,9 +1,9 @@
-import { afterEach, beforeEach, describe, it, vi } from "vitest";
-import * as lib from "../src/lib.js";
-import { bootstrap } from "../src/bootstrap.js";
-import os from "os";
-import { postinstall } from "./util/postinstall.js";
 import fs from "fs-extra";
+import os from "os";
+import { afterEach, beforeEach, describe, it, vi } from "vitest";
+import { bootstrap } from "../src/bootstrap.js";
+import * as lib from "../src/lib.js";
+import { postinstall } from "./util/postinstall.js";
 
 const configPath = `${os.tmpdir()}/mknode.json`;
 const projectPath = `${os.tmpdir()}/project`;
