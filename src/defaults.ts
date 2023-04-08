@@ -95,7 +95,7 @@ export const gitignore = "/node_modules\n/dist\n*.env\n!.env.example\n";
 
 export const indexTs = 'console.log("Hello, World!");\n';
 
-export const dockerfile = `FROM node:16-alpine
+export const dockerfile = `FROM node:19-alpine
 
 WORKDIR /app
 
