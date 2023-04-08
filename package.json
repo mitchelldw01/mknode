@@ -9,7 +9,8 @@
     "build": "tsc --project tsconfig.build.json && node dist/build.js",
     "postinstall": "node dist/postinstall.js",
     "lint": "eslint .",
-    "format": "eslint --fix ."
+    "format": "eslint --fix .",
+    "prepublishOnly": "npm run build"
   },
   "bin": {
     "mknode": "dist/index.js"
