@@ -82,7 +82,18 @@ export async function updatePackageJson(scripts: Scripts, cwd: string): Promise<
   packageJson.main = packageJson.main === "index.js" ? "dist/index.js" : packageJson.main;
   packageJson.type = "module";
 
-  await fs.writeJson(packageJsonPath, packageJson, { spaces: 2 });
+  const { name, version, description, main, type, ...rest } = packageJson;
+  const updatedPackageJson = {
+    name,
+    version,
+    description,
+    main,
+    type,
+    scripts,
+    ...rest,
+  };
+
+  await fs.writeJson(packageJsonPath, updatedPackageJson, { spaces: 2 });
 }
 
 export async function installDependencies(devDependencies: string[], cwd: string): Promise<void> {
