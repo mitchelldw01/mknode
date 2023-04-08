@@ -20,7 +20,7 @@ async function postinstall(): Promise<void> {
       type: "confirm",
       name: "answer",
       message:
-        "This version may include changes to some defaults, do you want to update them? Doing so will overwrite your current config.",
+        "This version may include changes to some defaults, do you want to update them? Doing so will overwrite your current configuration.",
       default: false,
     };
 
