@@ -8,4 +8,4 @@ const cwd = process.cwd();
 
 const configPath = path.join(homedir(), ".config/mknode.json");
 
-await bootstrap(cwd, configPath);
+await bootstrap(process.argv.slice(2), cwd, configPath);

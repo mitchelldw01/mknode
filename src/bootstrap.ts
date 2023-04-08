@@ -11,7 +11,11 @@ import {
   updatePackageJson,
 } from "./lib.js";
 
-export async function bootstrap(cwd: string, configPath: string): Promise<void> {
+export async function bootstrap(
+  initArgs: string[],
+  cwd: string,
+  configPath: string,
+): Promise<void> {
   const {
     devDependencies,
     eslintrc,
@@ -25,7 +29,7 @@ export async function bootstrap(cwd: string, configPath: string): Promise<void> 
     tsconfigEsLint,
   } = await readBootstrapData(configPath);
 
-  await initPackageJson(cwd);
+  await initPackageJson(initArgs, cwd);
   await updatePackageJson(scripts, cwd);
 
   process.stdout.write("\n");

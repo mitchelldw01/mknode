@@ -43,9 +43,9 @@ export async function readBootstrapData(configPath: string): Promise<BootstrapDa
   };
 }
 
-export async function initPackageJson(cwd: string): Promise<void> {
+export async function initPackageJson(args: string[], cwd: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    const child = spawn("npm", ["init", ...process.argv.slice(2)], { cwd });
+    const child = spawn("npm", ["init", ...args], { cwd });
 
     child.on("close", (code) => {
       if (code === 0) {
