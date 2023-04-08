@@ -99,6 +99,7 @@ describe("lib", () => {
       const packageJson = await fs.readJSON(`${tempDir}/package.json`);
       expect(packageJson.scripts).toEqual(scripts);
       expect(packageJson.type).toEqual("module");
+      expect(packageJson.main).toEqual("dist/index.js");
     });
   });
 

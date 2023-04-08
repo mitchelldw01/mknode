@@ -77,6 +77,7 @@ export async function updatePackageJson(scripts: Scripts, cwd: string): Promise<
     ...other,
   };
 
+  packageJson.main = packageJson.main === "index.js" ? "dist/index.js" : packageJson.main;
   packageJson.type = "module";
 
   await fs.writeJson(packageJsonPath, packageJson, { spaces: 2 });
