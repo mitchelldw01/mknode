@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest --threads false",
     "postinstall": "npx ts-node --swc src/postinstall.ts"
   },
   "bin": {
