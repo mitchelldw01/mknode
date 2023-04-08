@@ -3,7 +3,7 @@ export const scripts = {
   "test:watch": "vitest",
   start: "ts-node src/index.ts",
   "start:prod": "node dist/index.js",
-  build: "tsc",
+  build: "tsc --project tsconfig.build.json",
   lint: "eslint .",
   format: "eslint --fix .",
 };

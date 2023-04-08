@@ -2,24 +2,25 @@
   "name": "mknode",
   "version": "1.0.0",
   "description": "Bootstrap Node.js projects with TypeScript, ESLint, Prettier, Docker and Vitest",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
     "test": "vitest --silent --threads false",
-    "build": "tsc --project tsconfig.build.json",
+    "build": "tsc --project tsconfig.build.json && node dist/build.js",
     "postinstall": "node dist/postinstall.js",
     "lint": "eslint .",
     "format": "eslint --fix ."
   },
   "bin": {
-    "mknode": "src/index.ts"
+    "mknode": "dist/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mitchelldw01/mknode.git"
   },
   "files": [
-    "dist"
+    "dist",
+    "!dist/build.js"
   ],
   "keywords": [
     "node",

@@ -1,4 +1,4 @@
-#!/usr/bin/env -S npx ts-node --swc
+#!/usr/bin/env -S npx ts-node
 
 import { homedir } from "os";
 import path from "path";
