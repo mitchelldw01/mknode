@@ -30,6 +30,7 @@ export async function bootstrap(
     tsconfigBuild,
     dockerfile,
     dockercompose,
+    dockerignore,
   } = await readBootstrapData(configPath);
 
   await initPackageJson(initArgs, cwd);
@@ -53,7 +54,7 @@ export async function bootstrap(
     createPrettierConfig(prettierrc, prettierignore, cwd),
     createGitignore(gitignore, cwd),
     createSrcCode(indexTs, cwd),
-    createDockerConfig(dockerfile, dockercompose, cwd),
+    createDockerConfig(dockerfile, dockercompose, dockerignore, cwd),
   ]);
 
   spinner.succeed();

@@ -120,8 +120,12 @@ services:
     build: .
     volumes:
       - .:/app
+      - /app/node_modules
+      - /app/dist
     ports:
       - "3000:3000"
     stdin_open: true
     tty: true
 `;
+
+export const dockerignore = "/node_modules\n/dist\n";

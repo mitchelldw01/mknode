@@ -263,9 +263,10 @@ describe("lib", () => {
     });
 
     it("should create Dockerfile", async ({ expect }) => {
-      await createDockerConfig("dockerfile", "dockercompose", tempDir);
+      await createDockerConfig("dockerfile", "dockercompose", "dockerignore", tempDir);
       expect(await fs.readFile(`${tempDir}/Dockerfile`, "utf-8")).toEqual("dockerfile");
       expect(await fs.readFile(`${tempDir}/docker-compose.yml`, "utf-8")).toEqual("dockercompose");
+      expect(await fs.readFile(`${tempDir}/.dockerignore`, "utf-8")).toEqual("dockerignore");
     });
   });
 });

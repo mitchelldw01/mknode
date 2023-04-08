@@ -26,6 +26,7 @@ interface BootstrapData {
   tsconfigBuild: Record<string, unknown>;
   dockerfile: string;
   dockercompose: string;
+  dockerignore: string;
 }
 
 export async function readBootstrapData(configPath: string): Promise<BootstrapData> {
@@ -44,6 +45,7 @@ export async function readBootstrapData(configPath: string): Promise<BootstrapDa
     tsconfigBuild: data.tsconfigBuild || defaults.tsconfigBuild,
     dockerfile: data.dockerfile || defaults.dockerfile,
     dockercompose: data.dockercompose || defaults.dockercompose,
+    dockerignore: data.dockerignore || defaults.dockerignore,
   };
 }
 
@@ -131,8 +133,10 @@ export async function createSrcCode(indexTs: string, cwd: string): Promise<void>
 export async function createDockerConfig(
   dockerfile: string,
   dockercompose: string,
+  dockerignore: string,
   cwd: string,
 ): Promise<void> {
-  await fs.writeFile(path.join(cwd, "dockerfile"), dockerfile);
+  await fs.writeFile(path.join(cwd, "Dockerfile"), dockerfile);
   await fs.writeFile(path.join(cwd, "docker-compose.yml"), dockercompose);
+  await fs.writeFile(path.join(cwd, ".dockerignore"), dockerignore);
 }

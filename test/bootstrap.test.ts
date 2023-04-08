@@ -86,12 +86,14 @@ describe("bootstrap", () => {
     expect(spy).toHaveBeenCalledWith("indexTs", projectPath);
   });
 
-  it("calls createDockerfile with dockerfile, dockercompose and cwd", async ({ expect }) => {
+  it("calls createDockerfile with dockerfile, dockercompose, dockerignore and cwd", async ({
+    expect,
+  }) => {
     const spy = vi.spyOn(lib, "createDockerConfig");
     await bootstrap(["y"], projectPath, configPath);
 
     expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenCalledWith("dockerfile", "dockercompose", projectPath);
+    expect(spy).toHaveBeenCalledWith("dockerfile", "dockercompose", "dockerignore", projectPath);
   });
 });
 
@@ -121,6 +123,7 @@ function mockLib() {
           tsconfigBuild: { tsconfigBuild: true },
           dockerfile: "dockerfile",
           dockercompose: "dockercompose",
+          dockerignore: "dockerignore",
         };
       },
     };
