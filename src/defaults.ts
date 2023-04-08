@@ -27,29 +27,29 @@ export const tsconfig = {
     target: "es2022",
     module: "es2022",
     moduleResolution: "node",
-    outDir: "dist",
-    esModuleInterop: true,
-    forceConsistentCasingInFileNames: true,
-    strict: true,
-    skipLibCheck: true,
-  },
-  exclude: ["dist", "**/*.test.ts"],
-  "ts-node": {
-    esm: true,
-  },
-};
-
-export const tsconfigEsLint = {
-  compilerOptions: {
-    target: "es2022",
-    module: "es2022",
-    moduleResolution: "node",
     esModuleInterop: true,
     forceConsistentCasingInFileNames: true,
     strict: true,
     skipLibCheck: true,
   },
   exclude: ["dist"],
+  "ts-node": {
+    esm: true,
+  },
+};
+
+export const tsconfigBuild = {
+  compilerOptions: {
+    target: "es2022",
+    module: "es2022",
+    moduleResolution: "node",
+    outDir: "dist",
+    esModuleInterop: true,
+    forceConsistentCasingInFileNames: true,
+    strict: true,
+    skipLibCheck: true,
+  },
+  exclude: ["dist", "test", "**/*.test.ts"],
 };
 
 export const eslintrc = {
@@ -67,6 +67,7 @@ export const eslintrc = {
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
+    project: "tsconfig.json",
   },
   plugins: ["@typescript-eslint", "simple-import-sort", "prettier"],
   rules: {

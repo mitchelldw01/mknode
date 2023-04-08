@@ -138,22 +138,22 @@ describe("lib", () => {
           target: "es2022",
           module: "es2022",
         },
-        exclude: ["test"],
       };
 
-      const tsconfigEsLint = {
+      const tsconfigBuild = {
         compilerOptions: {
           target: "es2022",
           module: "es2022",
         },
+        exclude: ["test"],
       };
 
-      await createTsConfigs(tsconfig, tsconfigEsLint, tempDir);
+      await createTsConfigs(tsconfig, tsconfigBuild, tempDir);
 
       expect(await fs.pathExists(`${tempDir}/tsconfig.json`)).toBe(true);
-      expect(await fs.pathExists(`${tempDir}/tsconfig.eslint.json`)).toBe(true);
+      expect(await fs.pathExists(`${tempDir}/tsconfig.build.json`)).toBe(true);
       expect(await fs.readJSON(`${tempDir}/tsconfig.json`)).toEqual(tsconfig);
-      expect(await fs.readJSON(`${tempDir}/tsconfig.eslint.json`)).toEqual(tsconfigEsLint);
+      expect(await fs.readJSON(`${tempDir}/tsconfig.build.json`)).toEqual(tsconfigBuild);
     });
   });
 

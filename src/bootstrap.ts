@@ -27,7 +27,7 @@ export async function bootstrap(
     prettierrc,
     scripts,
     tsconfig,
-    tsconfigEsLint,
+    tsconfigBuild,
     dockerfile,
     dockercompose,
   } = await readBootstrapData(configPath);
@@ -48,7 +48,7 @@ export async function bootstrap(
   }
 
   await Promise.all([
-    createTsConfigs(tsconfig, tsconfigEsLint, cwd),
+    createTsConfigs(tsconfig, tsconfigBuild, cwd),
     createEsLintConfig(eslintrc, eslintignore, cwd),
     createPrettierConfig(prettierrc, prettierignore, cwd),
     createGitignore(gitignore, cwd),

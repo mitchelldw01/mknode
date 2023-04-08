@@ -51,7 +51,7 @@ describe("bootstrap", () => {
     await bootstrap(["y"], projectPath, configPath);
 
     expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenCalledWith({ tsconfig: true }, { tsconfigEsLint: true }, projectPath);
+    expect(spy).toHaveBeenCalledWith({ tsconfig: true }, { tsconfigBuild: true }, projectPath);
   });
 
   it("calls createEsLintConfig with eslintrc, eslintignore and cwd", async ({ expect }) => {
@@ -118,7 +118,7 @@ function mockLib() {
           prettierrc: { prettierrc: true },
           scripts: { scripts: true },
           tsconfig: { tsconfig: true },
-          tsconfigEsLint: { tsconfigEsLint: true },
+          tsconfigBuild: { tsconfigBuild: true },
           dockerfile: "dockerfile",
           dockercompose: "dockercompose",
         };

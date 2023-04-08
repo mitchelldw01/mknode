@@ -23,7 +23,7 @@ interface BootstrapData {
   prettierignore: string;
   prettierrc: Record<string, unknown>;
   tsconfig: Record<string, unknown>;
-  tsconfigEsLint: Record<string, unknown>;
+  tsconfigBuild: Record<string, unknown>;
   dockerfile: string;
   dockercompose: string;
 }
@@ -41,7 +41,7 @@ export async function readBootstrapData(configPath: string): Promise<BootstrapDa
     prettierignore: data.prettierignore || defaults.prettierignore,
     prettierrc: data.prettierrc || defaults.prettierrc,
     tsconfig: data.tsconfig || defaults.tsconfig,
-    tsconfigEsLint: data.tsconfigEsLint || defaults.tsconfigEsLint,
+    tsconfigBuild: data.tsconfigBuild || defaults.tsconfigBuild,
     dockerfile: data.dockerfile || defaults.dockerfile,
     dockercompose: data.dockercompose || defaults.dockercompose,
   };
@@ -91,11 +91,11 @@ export async function installDependencies(devDependencies: string[], cwd: string
 
 export async function createTsConfigs(
   tsconfig: unknown,
-  tsconfigEsLint: unknown,
+  tsconfigBuild: unknown,
   cwd: string,
 ): Promise<void> {
   await fs.writeJSON(path.join(cwd, "tsconfig.json"), tsconfig, { spaces: 2 });
-  await fs.writeJSON(path.join(cwd, "tsconfig.eslint.json"), tsconfigEsLint, { spaces: 2 });
+  await fs.writeJSON(path.join(cwd, "tsconfig.build.json"), tsconfigBuild, { spaces: 2 });
 }
 
 export async function createEsLintConfig(
