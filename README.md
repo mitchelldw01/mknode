@@ -6,9 +6,11 @@ Bootstrap Node.js projects with TypeScript, ESLint, Prettier and Docker
 
 ## Overview
 
-I got tired of going through the tedious process of setting up NPM packages with everything I need, so I created this tool. It uses my preferred configurations by default but can easily be configured to use yours instead.
+Tired of the tedious process of setting up NPM packages with all the necessary components, I developed a convenient tool to streamline the process. It uses my preferred configurations by default, but can be easily customized.
 
-After installation, the configuration data for every file can be found in `~/.config/mknode.json`. Edit that file to change the data that new projects will be initialized with. For example, if you want every project to include [nodemon](https://www.npmjs.com/package/nodemon), then add `nodemon` to the `devDependencies` array.
+Although cloning a base repository, modifying `package.json` fields, and running `npm update` is an option, this tool allows you to get setup with a single command. It also offers the advantage of installing the latest versions of dependencies (unless specified otherwise), without being limited by the version ranges in the base repository's `package.json`.
+
+Upon installation, you can find the configuration data for each file in `~/.config/mknode.json`. To modify the data for new projects, simply edit this file. For instance, to include [nodemon](https://www.npmjs.com/package/nodemon) in every project, add `nodemon` to the `devDependencies` array. Keep in mind that installing a new version of this package will overwrite any changes you've made.
 
 ## Installation
 
