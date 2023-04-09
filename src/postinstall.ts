@@ -1,5 +1,4 @@
 import fs from "fs-extra";
-import inquirer from "inquirer";
 import os from "os";
 import path from "path";
 import * as defaults from "./defaults.js";
@@ -15,27 +14,11 @@ await postinstall();
 async function postinstall(): Promise<void> {
   if (process.env.LINKING === "1") return;
 
-  if (await fs.pathExists(configPath)) {
-    const question = {
-      type: "confirm",
-      name: "answer",
-      message:
-        "This version may include changes to some defaults, do you want to update them? Doing so will overwrite your current configuration.",
-      default: false,
-    };
-
-    const { answer } = await inquirer.prompt([question]);
-
-    if (answer === true) {
-      await fs.writeJSON(configPath, defaults, { spaces: 2 });
-    }
+  if (useTempDir) {
+    await fs.promises.open(configPath, "w");
   } else {
-    if (useTempDir) {
-      await fs.promises.open(configPath, "w");
-    } else {
-      await fs.ensureFile(configPath);
-    }
-
-    await fs.writeJSON(configPath, defaults, { spaces: 2 });
+    await fs.ensureFile(configPath);
   }
+
+  await fs.writeJSON(configPath, defaults, { spaces: 2 });
 }
