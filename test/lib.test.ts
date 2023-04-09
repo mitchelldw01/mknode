@@ -24,7 +24,7 @@ describe("lib", () => {
     describe("when config file is complete", () => {
       beforeEach(async () => {
         await fs.open(configPath, "w");
-        await postinstall("y");
+        await postinstall();
       });
 
       afterEach(async () => {
@@ -50,6 +50,13 @@ describe("lib", () => {
       it("should replace missing fields with defaults", async ({ expect }) => {
         const data = await readBootstrapData(configPath);
         expect(data).toEqual({ ...defaults, prettierrc: defaults.prettierrc });
+      });
+    });
+
+    describe("when config file does not exist", () => {
+      it("should use defaults", async ({ expect }) => {
+        const data = await readBootstrapData(configPath);
+        expect(data).toEqual({ ...defaults });
       });
     });
   });

@@ -30,7 +30,9 @@ interface BootstrapData {
 }
 
 export async function readBootstrapData(configPath: string): Promise<BootstrapData> {
-  const data = (await fs.readJSON(configPath)) as BootstrapData;
+  const data = (await fs.pathExists(configPath))
+    ? ((await fs.readJSON(configPath)) as BootstrapData)
+    : defaults;
 
   return {
     scripts: data.scripts || defaults.scripts,

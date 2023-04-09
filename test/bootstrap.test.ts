@@ -13,7 +13,7 @@ describe("bootstrap", () => {
     mockLib();
     await fs.open(configPath, "w");
     await fs.open(projectPath, "w");
-    await postinstall("y");
+    await postinstall();
   });
 
   afterEach(async () => {
