@@ -1,6 +1,6 @@
 {
   "name": "mknode",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Bootstrap Node.js projects with TypeScript, ESLint, Prettier and Docker",
   "main": "dist/index.js",
   "type": "module",
